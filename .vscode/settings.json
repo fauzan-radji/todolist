@@ -1,0 +1,6 @@
+{
+  "java.project.referencedLibraries": [
+    "lib/**/*.jar",
+    "/media/fauzan-radji/New Volume/code/java/_libs/db4o.jar"
+  ]
+}
