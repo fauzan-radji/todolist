@@ -9,7 +9,6 @@ import com.db4o.ObjectContainer;
 import controllers.ContainerController;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.GroupLayout.ParallelGroup;
 import javax.swing.GroupLayout.SequentialGroup;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
@@ -56,22 +55,6 @@ public class MainFrame extends javax.swing.JFrame {
       panels.add(instantiatePanel(container));
     }
 
-    // panelTodo1 = new javax.swing.JPanel();
-    // jCheckBox10 = new javax.swing.JCheckBox();
-    // jCheckBox11 = new javax.swing.JCheckBox();
-    // jCheckBox12 = new javax.swing.JCheckBox();
-    // jCheckBox13 = new javax.swing.JCheckBox();
-    // panelTodo2 = new javax.swing.JPanel();
-    // jCheckBox20 = new javax.swing.JCheckBox();
-    // jCheckBox21 = new javax.swing.JCheckBox();
-    // jCheckBox22 = new javax.swing.JCheckBox();
-    // jCheckBox23 = new javax.swing.JCheckBox();
-    // panelTodo3 = new javax.swing.JPanel();
-    // jCheckBox30 = new javax.swing.JCheckBox();
-    // jCheckBox31 = new javax.swing.JCheckBox();
-    // jCheckBox32 = new javax.swing.JCheckBox();
-    // jCheckBox33 = new javax.swing.JCheckBox();
-
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
     buttonTambah.setText("Tambah");
@@ -80,242 +63,9 @@ public class MainFrame extends javax.swing.JFrame {
       javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0))
     );
 
-    // panel todo 0
     for (JPanel panel : panels) {
       setupPanelTodo(panel);
     }
-
-    // panelTodo1.setBorder(
-    //   javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0))
-    // );
-
-    // jCheckBox10.setText("jCheckBox1");
-
-    // jCheckBox11.setText("jCheckBox1");
-
-    // jCheckBox12.setText("jCheckBox1");
-
-    // jCheckBox13.setText("jCheckBox1");
-
-    // javax.swing.GroupLayout panelTodo1Layout = new javax.swing.GroupLayout(
-    //   panelTodo1
-    // );
-    // panelTodo1.setLayout(panelTodo1Layout);
-    // panelTodo1Layout.setHorizontalGroup(
-    //   panelTodo1Layout
-    //     .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-    //     .addGroup(
-    //       panelTodo1Layout
-    //         .createSequentialGroup()
-    //         .addContainerGap()
-    //         .addGroup(
-    //           panelTodo1Layout
-    //             .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-    //             .addComponent(
-    //               jCheckBox10,
-    //               javax.swing.GroupLayout.DEFAULT_SIZE,
-    //               110,
-    //               Short.MAX_VALUE
-    //             )
-    //             .addComponent(
-    //               jCheckBox11,
-    //               javax.swing.GroupLayout.DEFAULT_SIZE,
-    //               javax.swing.GroupLayout.DEFAULT_SIZE,
-    //               Short.MAX_VALUE
-    //             )
-    //             .addComponent(
-    //               jCheckBox12,
-    //               javax.swing.GroupLayout.DEFAULT_SIZE,
-    //               javax.swing.GroupLayout.DEFAULT_SIZE,
-    //               Short.MAX_VALUE
-    //             )
-    //             .addComponent(
-    //               jCheckBox13,
-    //               javax.swing.GroupLayout.DEFAULT_SIZE,
-    //               javax.swing.GroupLayout.DEFAULT_SIZE,
-    //               Short.MAX_VALUE
-    //             )
-    //         )
-    //         .addGap(50, 50, 50)
-    //     )
-    // );
-    // panelTodo1Layout.setVerticalGroup(
-    //   panelTodo1Layout
-    //     .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-    //     .addGroup(
-    //       panelTodo1Layout
-    //         .createSequentialGroup()
-    //         .addContainerGap()
-    //         .addComponent(jCheckBox10)
-    //         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-    //         .addComponent(jCheckBox11)
-    //         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-    //         .addComponent(jCheckBox12)
-    //         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-    //         .addComponent(jCheckBox13)
-    //         .addContainerGap(
-    //           javax.swing.GroupLayout.DEFAULT_SIZE,
-    //           Short.MAX_VALUE
-    //         )
-    //     )
-    // );
-
-    // panelTodo2.setBorder(
-    //   javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0))
-    // );
-
-    // jCheckBox20.setText("jCheckBox1");
-
-    // jCheckBox21.setText("jCheckBox1");
-
-    // jCheckBox22.setText("jCheckBox1");
-
-    // jCheckBox23.setText("jCheckBox1");
-
-    // javax.swing.GroupLayout panelTodo2Layout = new javax.swing.GroupLayout(
-    //   panelTodo2
-    // );
-    // panelTodo2.setLayout(panelTodo2Layout);
-    // panelTodo2Layout.setHorizontalGroup(
-    //   panelTodo2Layout
-    //     .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-    //     .addGroup(
-    //       panelTodo2Layout
-    //         .createSequentialGroup()
-    //         .addContainerGap()
-    //         .addGroup(
-    //           panelTodo2Layout
-    //             .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-    //             .addComponent(
-    //               jCheckBox20,
-    //               javax.swing.GroupLayout.DEFAULT_SIZE,
-    //               110,
-    //               Short.MAX_VALUE
-    //             )
-    //             .addComponent(
-    //               jCheckBox21,
-    //               javax.swing.GroupLayout.DEFAULT_SIZE,
-    //               javax.swing.GroupLayout.DEFAULT_SIZE,
-    //               Short.MAX_VALUE
-    //             )
-    //             .addComponent(
-    //               jCheckBox22,
-    //               javax.swing.GroupLayout.DEFAULT_SIZE,
-    //               javax.swing.GroupLayout.DEFAULT_SIZE,
-    //               Short.MAX_VALUE
-    //             )
-    //             .addComponent(
-    //               jCheckBox23,
-    //               javax.swing.GroupLayout.DEFAULT_SIZE,
-    //               javax.swing.GroupLayout.DEFAULT_SIZE,
-    //               Short.MAX_VALUE
-    //             )
-    //         )
-    //         .addGap(50, 50, 50)
-    //     )
-    // );
-    // panelTodo2Layout.setVerticalGroup(
-    //   panelTodo2Layout
-    //     .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-    //     .addGroup(
-    //       panelTodo2Layout
-    //         .createSequentialGroup()
-    //         .addContainerGap()
-    //         .addComponent(jCheckBox20)
-    //         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-    //         .addComponent(jCheckBox21)
-    //         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-    //         .addComponent(jCheckBox22)
-    //         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-    //         .addComponent(jCheckBox23)
-    //         .addContainerGap(
-    //           javax.swing.GroupLayout.DEFAULT_SIZE,
-    //           Short.MAX_VALUE
-    //         )
-    //     )
-    // );
-
-    // panelTodo3.setBorder(
-    //   javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0))
-    // );
-
-    // jCheckBox30.setText("jCheckBox1");
-
-    // jCheckBox31.setText("jCheckBox1");
-
-    // jCheckBox32.setText("jCheckBox1");
-
-    // jCheckBox33.setText("jCheckBox1");
-
-    // javax.swing.GroupLayout panelTodo3Layout = new javax.swing.GroupLayout(
-    //   panelTodo3
-    // );
-    // panelTodo3.setLayout(panelTodo3Layout);
-    // panelTodo3Layout.setHorizontalGroup(
-    //   panelTodo3Layout
-    //     .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-    //     .addGroup(
-    //       panelTodo3Layout
-    //         .createSequentialGroup()
-    //         .addContainerGap()
-    //         .addGroup(
-    //           panelTodo3Layout
-    //             .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-    //             .addComponent(
-    //               jCheckBox30,
-    //               javax.swing.GroupLayout.DEFAULT_SIZE,
-    //               110,
-    //               Short.MAX_VALUE
-    //             )
-    //             .addComponent(
-    //               jCheckBox31,
-    //               javax.swing.GroupLayout.DEFAULT_SIZE,
-    //               javax.swing.GroupLayout.DEFAULT_SIZE,
-    //               Short.MAX_VALUE
-    //             )
-    //             .addComponent(
-    //               jCheckBox32,
-    //               javax.swing.GroupLayout.DEFAULT_SIZE,
-    //               javax.swing.GroupLayout.DEFAULT_SIZE,
-    //               Short.MAX_VALUE
-    //             )
-    //             .addComponent(
-    //               jCheckBox33,
-    //               javax.swing.GroupLayout.DEFAULT_SIZE,
-    //               javax.swing.GroupLayout.DEFAULT_SIZE,
-    //               Short.MAX_VALUE
-    //             )
-    //         )
-    //         .addGap(50, 50, 50)
-    //     )
-    // );
-    // panelTodo3Layout.setVerticalGroup(
-    //   panelTodo3Layout
-    //     .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-    //     .addGroup(
-    //       panelTodo3Layout
-    //         .createSequentialGroup()
-    //         .addContainerGap()
-    //         .addComponent(jCheckBox30)
-    //         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-    //         .addComponent(jCheckBox31)
-    //         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-    //         .addComponent(jCheckBox32)
-    //         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-    //         .addComponent(jCheckBox33)
-    //         .addContainerGap(
-    //           javax.swing.GroupLayout.DEFAULT_SIZE,
-    //           Short.MAX_VALUE
-    //         )
-    //     )
-    // );
-
-    for (JPanel panel : panels) {
-      layeredPane.setLayer(panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-    }
-    // layeredPane.setLayer(panelTodo1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-    // layeredPane.setLayer(panelTodo2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-    // layeredPane.setLayer(panelTodo3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
     javax.swing.GroupLayout layeredPaneLayout = new javax.swing.GroupLayout(
       layeredPane
@@ -345,25 +95,6 @@ public class MainFrame extends javax.swing.JFrame {
               layeredPaneLayout
                 .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(sequentialGroup)
-              // .addGroup(
-              //   layeredPaneLayout
-              //     .createSequentialGroup()
-              //     .addComponent(
-              //       panelTodo2,
-              //       javax.swing.GroupLayout.PREFERRED_SIZE,
-              //       javax.swing.GroupLayout.DEFAULT_SIZE,
-              //       javax.swing.GroupLayout.PREFERRED_SIZE
-              //     )
-              //     .addPreferredGap(
-              //       javax.swing.LayoutStyle.ComponentPlacement.RELATED
-              //     )
-              //     .addComponent(
-              //       panelTodo3,
-              //       javax.swing.GroupLayout.PREFERRED_SIZE,
-              //       javax.swing.GroupLayout.DEFAULT_SIZE,
-              //       javax.swing.GroupLayout.PREFERRED_SIZE
-              //     )
-              // )
             )
             .addContainerGap(
               javax.swing.GroupLayout.DEFAULT_SIZE,
@@ -475,10 +206,10 @@ public class MainFrame extends javax.swing.JFrame {
     JCheckBox jCheckBox02 = new javax.swing.JCheckBox();
     JCheckBox jCheckBox03 = new javax.swing.JCheckBox();
 
-    jCheckBox00.setText("jCheckBox1");
-    jCheckBox01.setText("jCheckBox1");
-    jCheckBox02.setText("jCheckBox1");
-    jCheckBox03.setText("jCheckBox1");
+    jCheckBox00.setText("Task 1");
+    jCheckBox01.setText("Task 2");
+    jCheckBox02.setText("Task 3");
+    jCheckBox03.setText("Task 4");
 
     javax.swing.GroupLayout panelTodo0Layout = new javax.swing.GroupLayout(
       panel
@@ -592,28 +323,6 @@ public class MainFrame extends javax.swing.JFrame {
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton buttonTambah;
-  // private javax.swing.JCheckBox jCheckBox00;
-  // private javax.swing.JCheckBox jCheckBox01;
-  // private javax.swing.JCheckBox jCheckBox02;
-  // private javax.swing.JCheckBox jCheckBox03;
-
-  // private javax.swing.JCheckBox jCheckBox10;
-  // private javax.swing.JCheckBox jCheckBox11;
-  // private javax.swing.JCheckBox jCheckBox12;
-  // private javax.swing.JCheckBox jCheckBox13;
-  // private javax.swing.JCheckBox jCheckBox20;
-  // private javax.swing.JCheckBox jCheckBox21;
-  // private javax.swing.JCheckBox jCheckBox22;
-  // private javax.swing.JCheckBox jCheckBox23;
-  // private javax.swing.JCheckBox jCheckBox30;
-  // private javax.swing.JCheckBox jCheckBox31;
-  // private javax.swing.JCheckBox jCheckBox32;
-  // private javax.swing.JCheckBox jCheckBox33;
   private javax.swing.JLayeredPane layeredPane;
-  // private javax.swing.JPanel panelTodo0;
-
-  // private javax.swing.JPanel panelTodo1;
-  // private javax.swing.JPanel panelTodo2;
-  // private javax.swing.JPanel panelTodo3;
   // End of variables declaration//GEN-END:variables
 }
