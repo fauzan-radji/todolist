@@ -7,7 +7,6 @@ package controllers;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 import interfaces.ContainerInterface;
-
 import java.util.ArrayList;
 import java.util.List;
 import models.Container;
@@ -54,14 +53,13 @@ public class ContainerController implements ContainerInterface {
   @Override
   public List<Container> getAll() {
     List<Container> containers = null;
-      ObjectSet results = db.queryByExample(new Container());
-    if(results.hasNext()) {
+    ObjectSet results = db.queryByExample(new Container());
+    if (results.hasNext()) {
       containers = new ArrayList<>();
 
-      for(Object result: results)
-        containers.add((Container) result);
+      for (Object result : results) containers.add((Container) result);
     }
-    
+
     return containers;
   }
 }
