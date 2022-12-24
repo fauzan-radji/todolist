@@ -6,6 +6,7 @@ package controllers;
 
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
+import com.db4o.query.Query;
 import interfaces.ContainerInterface;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,12 +43,22 @@ public class ContainerController implements ContainerInterface {
 
   @Override
   public Container delete(String id) {
-    throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    Container container = getById(id);
+    if (container != null) db.delete(container);
+    return container;
   }
 
   @Override
   public Container getById(String id) {
-    throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    Container container = null;
+    Query query = db.query();
+    query.constrain(Container.class);
+    query.descend("id").constrain(id);
+
+    ObjectSet result = query.execute();
+    if (result.hasNext()) container = (Container) result.next();
+
+    return container;
   }
 
   @Override

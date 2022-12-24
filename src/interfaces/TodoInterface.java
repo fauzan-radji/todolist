@@ -12,10 +12,17 @@ import models.Todo;
  * @author fauzan-radji
  */
 public interface TodoInterface {
-    public Todo insert(Todo container);
-    public Todo update(String id, Todo container);
-    public Todo read(String id);
-    public Todo delete(String id);
-    public Todo getById(String id);
-    public List<Todo> getAll();
+  public Todo insert(Todo container);
+
+  public Todo update(String id, Todo container);
+
+  public Todo read(String id);
+
+  public Todo delete(String id);
+
+  public Todo getById(String id);
+
+  public List<Todo> getAll();
+
+  public List<Todo> getByContainerId(String id);
 }

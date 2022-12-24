@@ -7,12 +7,18 @@ package views;
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import controllers.ContainerController;
+import controllers.TodoController;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.ParallelGroup;
 import javax.swing.GroupLayout.SequentialGroup;
 import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import models.Container;
+import models.Todo;
 
 /**
  *
@@ -22,7 +28,9 @@ public class MainFrame extends javax.swing.JFrame {
 
   ObjectContainer db;
   ContainerController containerController;
+  TodoController todoController;
   List<Container> containers;
+  AddTodoInternalFrame addTodoInternalFrame;
 
   /**
    * Creates new form MainFrame
@@ -31,7 +39,12 @@ public class MainFrame extends javax.swing.JFrame {
     // init db
     initDB("db.yap");
     containerController = new ContainerController(db);
+    todoController = new TodoController(db);
     containers = containerController.getAll();
+
+    addTodoInternalFrame = new AddTodoInternalFrame(db, containerController);
+    addTodoInternalFrame.setClosable(true);
+    add(addTodoInternalFrame);
 
     initComponents();
   }
@@ -50,113 +63,108 @@ public class MainFrame extends javax.swing.JFrame {
   private void initComponents() {
     buttonTambah = new javax.swing.JButton();
     layeredPane = new javax.swing.JLayeredPane();
+    jPanel = new JPanel();
     List<JPanel> panels = new ArrayList<>();
     for (Container container : containers) {
-      panels.add(instantiatePanel(container));
+      JPanel panel = instantiatePanel(container);
+
+      List<Todo> todos = todoController.getByContainerId(container.getId());
+      setupPanelTodo(panel, todos);
+      panel.addMouseListener(
+        new java.awt.event.MouseAdapter() {
+          public void mouseClicked(java.awt.event.MouseEvent evt) {
+            panelTodoMouseClicked(evt, container, db);
+          }
+        }
+      );
+
+      panels.add(panel);
     }
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
     buttonTambah.setText("Tambah");
+    buttonTambah.addActionListener(
+      new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+          buttonTambahActionPerformed(evt);
+        }
+      }
+    );
 
-    layeredPane.setBorder(
+    jPanel.setBorder(
       javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0))
     );
 
-    for (JPanel panel : panels) {
-      setupPanelTodo(panel);
-    }
+    GroupLayout jPanelLayout = new GroupLayout(jPanel);
+    jPanel.setLayout(jPanelLayout);
 
-    javax.swing.GroupLayout layeredPaneLayout = new javax.swing.GroupLayout(
-      layeredPane
-    );
-    layeredPane.setLayout(layeredPaneLayout);
-
-    SequentialGroup sequentialGroup = layeredPaneLayout.createSequentialGroup();
+    SequentialGroup sequentialGroup = jPanelLayout.createSequentialGroup();
     for (JPanel panel : panels) {
       sequentialGroup
         .addComponent(
           panel,
-          javax.swing.GroupLayout.PREFERRED_SIZE,
-          javax.swing.GroupLayout.DEFAULT_SIZE,
-          javax.swing.GroupLayout.PREFERRED_SIZE
+          GroupLayout.PREFERRED_SIZE,
+          GroupLayout.DEFAULT_SIZE,
+          GroupLayout.PREFERRED_SIZE
         )
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
     }
 
-    layeredPaneLayout.setHorizontalGroup(
-      layeredPaneLayout
-        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+    jPanelLayout.setHorizontalGroup(
+      jPanelLayout
+        .createParallelGroup(GroupLayout.Alignment.LEADING)
         .addGroup(
-          layeredPaneLayout
+          jPanelLayout
             .createSequentialGroup()
             .addContainerGap()
             .addGroup(
-              layeredPaneLayout
-                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              jPanelLayout
+                .createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(sequentialGroup)
             )
-            .addContainerGap(
-              javax.swing.GroupLayout.DEFAULT_SIZE,
-              Short.MAX_VALUE
-            )
-        )
-    );
-    layeredPaneLayout.setVerticalGroup(
-      layeredPaneLayout
-        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(
-          layeredPaneLayout
-            .createSequentialGroup()
-            .addContainerGap()
-            .addGroup(
-              layeredPaneLayout
-                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(
-                  panels.get(0),
-                  javax.swing.GroupLayout.PREFERRED_SIZE,
-                  javax.swing.GroupLayout.DEFAULT_SIZE,
-                  javax.swing.GroupLayout.PREFERRED_SIZE
-                )
-                .addComponent(
-                  panels.get(1),
-                  javax.swing.GroupLayout.PREFERRED_SIZE,
-                  javax.swing.GroupLayout.DEFAULT_SIZE,
-                  javax.swing.GroupLayout.PREFERRED_SIZE
-                )
-                .addComponent(
-                  panels.get(2),
-                  javax.swing.GroupLayout.PREFERRED_SIZE,
-                  javax.swing.GroupLayout.DEFAULT_SIZE,
-                  javax.swing.GroupLayout.PREFERRED_SIZE
-                )
-                .addComponent(
-                  panels.get(3),
-                  javax.swing.GroupLayout.PREFERRED_SIZE,
-                  javax.swing.GroupLayout.DEFAULT_SIZE,
-                  javax.swing.GroupLayout.PREFERRED_SIZE
-                )
-            )
-            .addContainerGap(
-              javax.swing.GroupLayout.DEFAULT_SIZE,
-              Short.MAX_VALUE
-            )
+            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         )
     );
 
-    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
-      getContentPane()
+    ParallelGroup parallelGroup = jPanelLayout.createParallelGroup(
+      GroupLayout.Alignment.LEADING
     );
+    for (JPanel panel : panels) {
+      parallelGroup.addComponent(
+        panel,
+        GroupLayout.PREFERRED_SIZE,
+        GroupLayout.DEFAULT_SIZE,
+        GroupLayout.PREFERRED_SIZE
+      );
+    }
+
+    jPanelLayout.setVerticalGroup(
+      jPanelLayout
+        .createParallelGroup(GroupLayout.Alignment.LEADING)
+        .addGroup(
+          jPanelLayout
+            .createSequentialGroup()
+            .addContainerGap()
+            .addGroup(parallelGroup)
+            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        )
+    );
+
+    layeredPane.setLayer(jPanel, JLayeredPane.DEFAULT_LAYER);
+    layeredPane.setLayer(addTodoInternalFrame, JLayeredPane.MODAL_LAYER);
+
+    GroupLayout layout = new GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout
-        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .createParallelGroup(GroupLayout.Alignment.LEADING)
         .addGroup(
           layout
             .createSequentialGroup()
             .addGroup(
               layout
-                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(
                   layout
                     .createSequentialGroup()
@@ -167,7 +175,7 @@ public class MainFrame extends javax.swing.JFrame {
                   layout
                     .createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(layeredPane)
+                    .addComponent(jPanel)
                 )
             )
             .addContainerGap()
@@ -175,14 +183,14 @@ public class MainFrame extends javax.swing.JFrame {
     );
     layout.setVerticalGroup(
       layout
-        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .createParallelGroup(GroupLayout.Alignment.LEADING)
         .addGroup(
           layout
             .createSequentialGroup()
             .addContainerGap()
             .addComponent(buttonTambah)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(layeredPane)
+            .addComponent(jPanel)
             .addContainerGap()
         )
     );
@@ -196,83 +204,92 @@ public class MainFrame extends javax.swing.JFrame {
     return panelTodo;
   }
 
-  public void setupPanelTodo(JPanel panel) {
+  public void setupPanelTodo(JPanel panel, List<Todo> todos) {
     panel.setBorder(
       javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0))
     );
 
-    JCheckBox jCheckBox00 = new javax.swing.JCheckBox();
-    JCheckBox jCheckBox01 = new javax.swing.JCheckBox();
-    JCheckBox jCheckBox02 = new javax.swing.JCheckBox();
-    JCheckBox jCheckBox03 = new javax.swing.JCheckBox();
+    List<JCheckBox> checkBoxes = new ArrayList<>();
+    JLabel emptyLabel = new JLabel("Belum ada tugas");
+    if (todos != null) {
+      for (Todo todo : todos) {
+        JCheckBox checkBox = new javax.swing.JCheckBox();
+        checkBoxes.add(checkBox);
+        checkBox.setText(todo.getTask());
+      }
+    }
 
-    jCheckBox00.setText("Task 1");
-    jCheckBox01.setText("Task 2");
-    jCheckBox02.setText("Task 3");
-    jCheckBox03.setText("Task 4");
-
-    javax.swing.GroupLayout panelTodo0Layout = new javax.swing.GroupLayout(
-      panel
+    GroupLayout panelLayout = new GroupLayout(panel);
+    panel.setLayout(panelLayout);
+    ParallelGroup parallelGroup = panelLayout.createParallelGroup(
+      GroupLayout.Alignment.LEADING
     );
-    panel.setLayout(panelTodo0Layout);
-    panelTodo0Layout.setHorizontalGroup(
-      panelTodo0Layout
-        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+    if (checkBoxes.isEmpty()) {
+      parallelGroup.addComponent(
+        emptyLabel,
+        GroupLayout.DEFAULT_SIZE,
+        GroupLayout.DEFAULT_SIZE,
+        Short.MAX_VALUE
+      );
+    } else {
+      for (JCheckBox checkBox : checkBoxes) {
+        parallelGroup.addComponent(
+          checkBox,
+          GroupLayout.DEFAULT_SIZE,
+          GroupLayout.DEFAULT_SIZE,
+          // 110,
+          Short.MAX_VALUE
+        );
+      }
+    }
+    panelLayout.setHorizontalGroup(
+      panelLayout
+        .createParallelGroup(GroupLayout.Alignment.LEADING)
         .addGroup(
-          panelTodo0Layout
+          panelLayout
             .createSequentialGroup()
             .addContainerGap()
-            .addGroup(
-              panelTodo0Layout
-                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(
-                  jCheckBox00,
-                  javax.swing.GroupLayout.DEFAULT_SIZE,
-                  110,
-                  Short.MAX_VALUE
-                )
-                .addComponent(
-                  jCheckBox01,
-                  javax.swing.GroupLayout.DEFAULT_SIZE,
-                  javax.swing.GroupLayout.DEFAULT_SIZE,
-                  Short.MAX_VALUE
-                )
-                .addComponent(
-                  jCheckBox02,
-                  javax.swing.GroupLayout.DEFAULT_SIZE,
-                  javax.swing.GroupLayout.DEFAULT_SIZE,
-                  Short.MAX_VALUE
-                )
-                .addComponent(
-                  jCheckBox03,
-                  javax.swing.GroupLayout.DEFAULT_SIZE,
-                  javax.swing.GroupLayout.DEFAULT_SIZE,
-                  Short.MAX_VALUE
-                )
-            )
+            .addGroup(parallelGroup)
             .addGap(50, 50, 50)
         )
     );
-    panelTodo0Layout.setVerticalGroup(
-      panelTodo0Layout
-        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+    SequentialGroup sequentialGroup = panelLayout.createSequentialGroup();
+    sequentialGroup.addContainerGap();
+    if (checkBoxes.isEmpty()) {
+      sequentialGroup.addComponent(emptyLabel);
+    } else {
+      for (JCheckBox checkBox : checkBoxes) {
+        sequentialGroup
+          .addComponent(checkBox)
+          .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+      }
+    }
+
+    panelLayout.setVerticalGroup(
+      panelLayout
+        .createParallelGroup(GroupLayout.Alignment.LEADING)
         .addGroup(
-          panelTodo0Layout
-            .createSequentialGroup()
-            .addContainerGap()
-            .addComponent(jCheckBox00)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jCheckBox01)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jCheckBox02)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jCheckBox03)
-            .addContainerGap(
-              javax.swing.GroupLayout.DEFAULT_SIZE,
-              Short.MAX_VALUE
-            )
+          sequentialGroup.addContainerGap(
+            GroupLayout.DEFAULT_SIZE,
+            Short.MAX_VALUE
+          )
         )
     );
+  }
+
+  private void buttonTambahActionPerformed(java.awt.event.ActionEvent evt) {
+    // TODO add your handling code here:
+    addTodoInternalFrame.setVisible(true);
+  }
+
+  private void panelTodoMouseClicked(
+    java.awt.event.MouseEvent evt,
+    Container container,
+    ObjectContainer db
+  ) {
+    // TODO add your handling code here:
+    ListFrame listFrame = new ListFrame(container, db);
+    listFrame.setVisible(true);
   }
 
   /**
@@ -324,5 +341,6 @@ public class MainFrame extends javax.swing.JFrame {
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton buttonTambah;
   private javax.swing.JLayeredPane layeredPane;
+  private javax.swing.JPanel jPanel;
   // End of variables declaration//GEN-END:variables
 }
